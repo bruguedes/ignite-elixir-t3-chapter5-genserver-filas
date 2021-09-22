@@ -1,6 +1,20 @@
 defmodule Queue do
   use GenServer
 
+  ############### ----CLIENT----#############
+
+  def start_link(inicial_state) when is_list(inicial_state) do
+    GenServer.start_link(__MODULE__, inicial_state)
+  end
+
+  def enqueue(pid, element) do
+    GenServer.cast(pid, {:enqueue, element})
+  end
+
+  def dequeue(pid) do
+    GenServer.call(pid, :dequeue)
+  end
+
   ############### ----GENSERVER----#############
   @impl true
   def init(state) do
