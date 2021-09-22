@@ -1,9 +1,10 @@
 defmodule Queue do
   use GenServer
+  @inicial_default [1, 2, 3]
 
   ############### ----CLIENT----#############
 
-  def start_link(inicial_state) when is_list(inicial_state) do
+  def start_link(inicial_state \\ @inicial_default) when is_list(inicial_state) do
     GenServer.start_link(__MODULE__, inicial_state)
   end
 
